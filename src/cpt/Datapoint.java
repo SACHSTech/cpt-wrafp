@@ -14,5 +14,21 @@ public class Datapoint {
         this.year = theYear;
         this.HHDI = theHHDI;
     }
-    
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getHHDI() {
+        return HHDI;
+    }
+
 }
