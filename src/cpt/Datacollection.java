@@ -1,5 +1,6 @@
 package cpt;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Datacollection {
     
@@ -16,11 +17,15 @@ public class Datacollection {
         try {
             BufferedReader fileRead = new BufferedReader(new FileReader(filePath));
             while (currentLine != null) {
-                currentLine = fileRead.readLine();
-                System.out.println(currentLine);
-                // if (currentLine != null) {
-                //     System.out.println("Output: " + currentLine);
-                // }
+
+                ArrayList<Datapoint> dataSet = new ArrayList<>();
+                String[] values = currentLine.split(",");
+                String countryName = values[0];
+                String countryCode = values[1];
+                int year = Integer.parseInt(values[2]);
+                double HHDI = Double.parseDouble(values[3]);
+                
+                
             }
     
     
