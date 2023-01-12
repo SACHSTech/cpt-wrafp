@@ -5,10 +5,10 @@ public class Datapoint {
     // Instance variables
     private String countryName;
     private String countryCode;
-    private String year;
-    private String HIHD;
+    private int year;
+    private double HIHD;
 
-    public Datapoint(String theCountryName, String theCountryCode, String theYear, String theHIHD) {
+    public Datapoint(String theCountryName, String theCountryCode, int theYear, double theHIHD) {
         this.countryName = theCountryName;
         this.countryCode = theCountryCode;
         this.year = theYear;
@@ -23,11 +23,11 @@ public class Datapoint {
         return countryCode;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public String getHIHD() {
+    public double getHIHD() {
         return HIHD;
     }
 
