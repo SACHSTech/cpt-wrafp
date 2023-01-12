@@ -1,42 +1,43 @@
 package cpt;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Datacollection {
-    
-    
-
-
     public static void main(String[] args) throws IOException {
-        // Initialize
-        String filePath = "src\\cpt\\human-development-index-escosura.csv";
+        ArrayList<Datapoint> dataSet = readCSV("src\\cpt\\human-development-index-escosura.csv");
+        System.out.println(dataSet);
+        // System.out.println(dataSet.indexOf());
+    }
+    
+    
+    private static ArrayList<Datapoint> readCSV(String filePath) throws IOException {
+        ArrayList<Datapoint> dataSet = new ArrayList<>();
 
-        String currentLine = "";
         
-        
-        try {
-            BufferedReader fileRead = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader fileRead = new BufferedReader(new FileReader(filePath))) {
+            String currentLine = fileRead.readLine();
+
             while (currentLine != null) {
+                String[] values = currentLine.split(","); // new index everytime parses a comma
 
-                ArrayList<Datapoint> dataSet = new ArrayList<>();
-                String[] values = currentLine.split(",");
+                currentLine = fileRead.readLine(); 
+      
                 String countryName = values[0];
                 String countryCode = values[1];
-                int year = Integer.parseInt(values[2]);
-                double HHDI = Double.parseDouble(values[3]);
+                String year = values[2];
+                String HIHD = values[3];
                 
-                
+                Datapoint addDataPoint = new Datapoint(countryName, countryCode, year, HIHD);
+                dataSet.add(addDataPoint);
             }
-    
-    
             fileRead.close();
+
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+            
+        return dataSet;
     }
-   
-       
         
-    
 }
