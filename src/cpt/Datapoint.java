@@ -5,14 +5,14 @@ public class Datapoint {
     // Instance variables
     private String countryName;
     private String countryCode;
-    private int year;
-    private double HHDI;
+    private String year;
+    private String HIHD;
 
-    public Datapoint(String theCountryName, String theCountryCode, int theYear, double theHHDI) {
+    public Datapoint(String theCountryName, String theCountryCode, String theYear, String theHIHD) {
         this.countryName = theCountryName;
         this.countryCode = theCountryCode;
         this.year = theYear;
-        this.HHDI = theHHDI;
+        this.HIHD = theHIHD;
     }
 
     public String getCountryName() {
@@ -23,12 +23,15 @@ public class Datapoint {
         return countryCode;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public double getHHDI() {
-        return HHDI;
+    public String getHIHD() {
+        return HIHD;
     }
 
+    public String toString() {
+        return getCountryName() + " (" + getCountryCode() + ") | Year: " + getYear() + " | HIHD: " + getHIHD() + "\n"; 
+    }
 }
