@@ -52,7 +52,7 @@ public class LineChartApp extends Application {
  
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
-        primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015")
+        primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015");
         primaryStage.show();
     }
  
