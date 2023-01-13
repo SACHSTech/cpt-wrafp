@@ -1,6 +1,6 @@
 
 /* ....Show License.... */
-package charts;
+package cpt;
  
  
 import javafx.application.Application;
@@ -25,8 +25,10 @@ public class LineChartApp extends Application {
     private NumberAxis yAxis;
  
     public Parent createContent() {
-        xAxis = new NumberAxis("Values for X-Axis", 0, 3, 1);
-        yAxis = new NumberAxis("Values for Y-Axis", 0, 3, 1);
+        xAxis = new NumberAxis("Values for X-Axis", 1870, 2015, 10);
+        xAxis.setLabel("Years");
+        yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
+        yAxis.setLabel("Historical Index of Human Development");
         ObservableList<XYChart.Series<Double,Double>> lineChartData =
             FXCollections.observableArrayList(
                 new LineChart.Series<>("Series 1",
@@ -50,6 +52,7 @@ public class LineChartApp extends Application {
  
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
+        primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015")
         primaryStage.show();
     }
  

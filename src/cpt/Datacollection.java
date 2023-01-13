@@ -20,23 +20,20 @@ public class Datacollection {
                 String[] values = currentLine.split(","); // seperates the values: name, year etc.
                 currentLine = fileRead.readLine(); 
 
-                if (values[2] != "" && values[3] != "") {
-                    // Assign values to appropriate variable types
-                    String countryName = values[0];
-                    String countryCode = values[1];
-                    int year = Integer.parseInt(values[2]);
-                    double HIHD = Double.parseDouble(values[3]);
-                    System.out.println(countryName);
-                    
-                    // Create new instance of Datapoint that takes the corresponding values
-                    Datapoint addDataPoint = new Datapoint(countryName, countryCode, year, HIHD);
-                    dataSet.add(addDataPoint);
-                }
-               
+                // Assign values to appropriate variable types
+                String countryName = values[0];
+                String countryCode = values[1];
+                int year = Integer.parseInt(values[2]);
+                double HIHD = Double.parseDouble(values[3]);
+                // System.out.println(countryName);
                 
+                // Create new instance of Datapoint that takes the corresponding values
+                Datapoint addDataPoint = new Datapoint(countryName, countryCode, year, HIHD);
+                dataSet.add(addDataPoint);
+                   
             }
-            fileRead.close();
 
+            fileRead.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
