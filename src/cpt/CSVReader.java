@@ -9,25 +9,28 @@ public class CSVReader {
     
     
    // private Datacollection chartDataHIHD = new Datacollection("chartDataHIHD", filePath, dataSetHIHD);
+   static HashMap<String, List<Datapoint>> countryData = new HashMap<>();
+   
 
     public static void main(String[] args) throws IOException {
         String filePath = "src\\cpt\\human-development-index-escosura.csv";
-
         ArrayList<Datapoint> dataSet = readCSV(filePath);
-        HashMap<String, List<Datapoint>> countryData = new HashMap<>();
+       
         
-
+        
+        countryData.put("afghanistan", dataSet);
         System.out.println(countryData);
         // .get("Austria")
     }
 
     private static ArrayList<Datapoint> readCSV(String filePath) throws IOException {
         ArrayList<Datapoint> dataSet = new ArrayList<>();
-        HashMap<String, List<Datapoint>> countryData = new HashMap<>();
+        HashMap<String, ArrayList<Datapoint>> countryData = new HashMap<>();
        
         try (BufferedReader fileRead = new BufferedReader(new FileReader(filePath))) {
             String currentLine = fileRead.readLine();
             currentLine = fileRead.readLine();
+            String prevCountry = "";
     
             while (currentLine != null) {
                 String[] values = currentLine.split(","); // seperates the values: name, year etc.
@@ -44,21 +47,22 @@ public class CSVReader {
                 Datapoint addDataPoint = new Datapoint(countryName, countryCode, year, HIHD);
                 dataSet.add(addDataPoint);
 
-                String prevCountry = "";
-
-                if (countryName.equals(prevCountry)) {
-                    countryData.get(countryName).add(addDataPoint);
-                }
-                else {
-                    countryData.putIfAbsent(countryName, new ArrayList<>());
-                }
-
-                prevCountry = countryName;
-                   
+                // ArrayList<Datapoint> tempArr = new ArrayList<>();
+                // tempArr.add(new Datapoint(countryName, countryCode, year, HIHD));
+                // countryData.put(countryName, tempArr);
+            if (countryName.equals(prevCountry)) {
+                countryData.get(countryName).addAll(dataSet);
+            }
+            else {
+               countryData.putIfAbsent(countryName, new ArrayList<>());
             }
 
+                
+            //     prevCountry = countryName;  
+            // }
+
             
-    
+            }
             fileRead.close();
         }
         catch (FileNotFoundException e) {
@@ -67,6 +71,7 @@ public class CSVReader {
             
         return dataSet;
     }
+    
 }
 
 // private void readCSV(String fileName) throws IOException {

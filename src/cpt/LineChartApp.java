@@ -29,22 +29,28 @@ public class LineChartApp extends Application {
         xAxis.setLabel("Years");
         yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
         yAxis.setLabel("Historical Index of Human Development");
-        ObservableList<XYChart.Series<Double,Double>> lineChartData =
-            FXCollections.observableArrayList(
-                new LineChart.Series<>("Series 1",
-                                       FXCollections.observableArrayList(
-                    new XYChart.Data<>(0.0, 1.0),
-                    new XYChart.Data<>(1.2, 1.4),
-                    new XYChart.Data<>(2.2, 1.9),
-                    new XYChart.Data<>(2.7, 2.3),
-                    new XYChart.Data<>(2.9, 0.5))),
-                new LineChart.Series<>("Series 2",
-                                       FXCollections.observableArrayList(
-                    new XYChart.Data<>(0.0, 1.6),
-                    new XYChart.Data<>(0.8, 0.4),
-                    new XYChart.Data<>(1.4, 2.9),
-                    new XYChart.Data<>(2.1, 1.3),
-                    new XYChart.Data<>(2.6, 0.9)))
+
+        for (int i = 0; i < 3211; i++) {
+            String country = dataSet.getCountryName();
+            List<Datapoint> insertData = dataSet.
+        }
+
+        ObservableList<XYChart.Series<Integer,Double>> lineChartData = FXCollections.observableArrayList(
+                new LineChart.Series<>("Series 1", FXCollections.observableArrayList(
+                                       
+                    new XYChart.Data<>(1950, 0.04),
+                    new XYChart.Data<>(1, 1.4),
+                    new XYChart.Data<>(2, 1.9),
+                    new XYChart.Data<>(2, 2.3),
+                    new XYChart.Data<>(2, 0.5))),
+
+                new LineChart.Series<>("Series 2", FXCollections.observableArrayList(
+                                       
+                    new XYChart.Data<>(0, 1.6),
+                    new XYChart.Data<>(0, 0.4),
+                    new XYChart.Data<>(1, 2.9),
+                    new XYChart.Data<>(2, 1.3),
+                    new XYChart.Data<>(2, 0.9)))
             );
         chart = new LineChart(xAxis, yAxis, lineChartData);
         return chart;
