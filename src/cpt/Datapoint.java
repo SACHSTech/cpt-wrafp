@@ -2,7 +2,6 @@ package cpt;
 
 public class Datapoint {
 
-    public static Object getHIHD;
     // Instance variables
     private String countryName;
     private String countryCode;

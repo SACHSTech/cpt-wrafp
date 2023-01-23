@@ -3,6 +3,9 @@
 package cpt;
  
  
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,28 +33,41 @@ public class LineChartApp extends Application {
         yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
         yAxis.setLabel("Historical Index of Human Development");
 
-        for (int i = 0; i < 3211; i++) {
-            String country = dataSet.getCountryName();
-            List<Datapoint> insertData = dataSet.
+        for (int i = 0; i < dataSet.size(); i++) {
+            String country = Datapoint.getCountryName();
+            List<Datapoint> insertData = new ArrayList<>();
+        
+           
+            XYChart.Series series = new XYChart.Series();
+            series.setName(country);
+            for (int j = 0; j < dataSet.size(); j++) {
+                Datapoint curData = dataSet.get(j); // somehow get the object to instantiate so u can reference with getters
+                // Add the data onto the series
+                series.getData().add(new XYChart.Data(country, Datapoint.get(HIHD)));
+            }
+        
+           
+
+           
         }
 
-        ObservableList<XYChart.Series<Integer,Double>> lineChartData = FXCollections.observableArrayList(
-                new LineChart.Series<>("Series 1", FXCollections.observableArrayList(
+        // ObservableList<XYChart.Series<Integer,Double>> lineChartData = FXCollections.observableArrayList(
+        //         new LineChart.Series<>("Series 1", FXCollections.observableArrayList(
                                        
-                    new XYChart.Data<>(1950, 0.04),
-                    new XYChart.Data<>(1, 1.4),
-                    new XYChart.Data<>(2, 1.9),
-                    new XYChart.Data<>(2, 2.3),
-                    new XYChart.Data<>(2, 0.5))),
+        //             new XYChart.Data<>(1950, 0.04),
+        //             new XYChart.Data<>(1, 1.4),
+        //             new XYChart.Data<>(2, 1.9),
+        //             new XYChart.Data<>(2, 2.3),
+        //             new XYChart.Data<>(2, 0.5))),
 
-                new LineChart.Series<>("Series 2", FXCollections.observableArrayList(
+        //         new LineChart.Series<>("Series 2", FXCollections.observableArrayList(
                                        
-                    new XYChart.Data<>(0, 1.6),
-                    new XYChart.Data<>(0, 0.4),
-                    new XYChart.Data<>(1, 2.9),
-                    new XYChart.Data<>(2, 1.3),
-                    new XYChart.Data<>(2, 0.9)))
-            );
+        //             new XYChart.Data<>(0, 1.6),
+        //             new XYChart.Data<>(0, 0.4),
+        //             new XYChart.Data<>(1, 2.9),
+        //             new XYChart.Data<>(2, 1.3),
+        //             new XYChart.Data<>(2, 0.9)))
+        //     );
         chart = new LineChart(xAxis, yAxis, lineChartData);
         return chart;
     }
