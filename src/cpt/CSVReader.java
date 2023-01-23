@@ -3,22 +3,27 @@ package cpt;
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * This class takes in data from a .csv file and stores the data into an arraylist and a hashmap.
+ * @author K.huang
+ */
 
 
 public class CSVReader {
-
-    private static String filePath = "src\\cpt\\human-development-index-escosura.csv";
+    
+    // Initialize Data Structures
     static HashMap<String, List<Datapoint>> countryData = new HashMap<>();
     static ArrayList<Datapoint> dataSet = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
+        String filePath = "src\\cpt\\human-development-index-escosura.csv"; // relative path of the .csv file
        
         try (BufferedReader fileRead = new BufferedReader(new FileReader(filePath))) {
             String currentLine = fileRead.readLine();
             currentLine = fileRead.readLine();
             String prevCountry = "";
     
+            // Read the .csv line by line with BufferedReader, keep looping until no more data
             while (currentLine != null) {
                 String[] values = currentLine.split(","); // seperates the values: name, year etc.
                 currentLine = fileRead.readLine(); 
@@ -28,20 +33,19 @@ public class CSVReader {
                 String countryCode = values[1];
                 int year = Integer.parseInt(values[2]);
                 double HIHD = Double.parseDouble(values[3]);
-                // System.out.println(countryName);
                 
                 // Create new instance of Datapoint that takes the corresponding values
                 Datapoint addDataPoint = new Datapoint(countryName, countryCode, year, HIHD);
+
+                // Add the instance into an arraylist that stores the data
                 dataSet.add(addDataPoint);
 
-            
+                // Add the data into hashmaps
                 if (!countryName.equals(prevCountry)) {
-                    // If the country name is different, create new list
-                    countryData.putIfAbsent(countryName, new ArrayList<>());
-
-
-                countryData.get(countryName).add(addDataPoint);
+                    countryData.putIfAbsent(countryName, new ArrayList<>()); // create a new arraylist for every corresponding country
                 }
+                countryData.get(countryName).add(addDataPoint);
+                
             }
             fileRead.close();
         }
@@ -49,6 +53,7 @@ public class CSVReader {
             e.printStackTrace();
         }
 
+        // Testing functionality
         System.out.println(countryData.get("Afghanistan"));
     }
 }
