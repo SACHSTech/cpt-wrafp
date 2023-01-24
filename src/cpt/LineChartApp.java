@@ -4,6 +4,8 @@ package cpt;
  
  
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +14,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.stage.Stage;
  
- 
+
 /**
  * A chart in which lines connect a series of data points. Useful for viewing
  * data trends over time.
@@ -31,16 +33,18 @@ public class LineChartApp extends Application {
         yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
         yAxis.setLabel("Historical Index of Human Development");
 
-		LineChart<Number, Number> linechart = new LineChart<Number, Number>(xAxis, yAxis);
-        // LineChart linechart = new LineChart(xAxis, yAxis);  
+       
+    
+    }
+        /*
+            LineChart<Number, Number> linechart = new LineChart<Number, Number>(xAxis, yAxis);
         
+        // LineChart linechart = new LineChart(xAxis, yAxis);  
         // LineChart<Integer, Number> linechart = new LineChart<Integer, Number>(xAxis, yAxis);
-
-        ArrayList<Datapoint> dataList = CSVReader.getDataSet();
-
 
         for (int i = 0; i < CSVReader.getSize(); i++) {
             String country = CSVReader.getCountryName().get(i);
+            List<Datapoint> dataList = CSVReader.getDataSet(country);
             // List<Datapoint> insertData = new ArrayList<>();
             XYChart.Series series = new XYChart.Series();
             series.setName(country);
@@ -51,6 +55,7 @@ public class LineChartApp extends Application {
                 // Add the data onto the series
                 series.getData().add(new XYChart.Data<>(year, graphData.getHIHD()));
             }
+            // after adding all of country's data into a series, add that to the linechart
             series.setName(country);
             linechart.getData().add(series);
 
@@ -77,6 +82,9 @@ public class LineChartApp extends Application {
         // chart = new LineChart(xAxis, yAxis, lineChartData);
         
     }
+         */
+
+		
  
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
@@ -92,3 +100,4 @@ public class LineChartApp extends Application {
     }
  
 }
+

@@ -83,8 +83,9 @@ public class CSVReader {
         return listCountries;
     }
 
-    public static ArrayList<Datapoint> getDataSet() {
-        return dataSet;
+
+    public static List<Datapoint> getDataSet(String countryName) {
+        return countryData.get(countryName);
     }
 
 
