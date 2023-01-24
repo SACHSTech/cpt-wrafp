@@ -1,8 +1,6 @@
 /* ....Show License.... */
 package cpt;
  
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +14,8 @@ import javafx.stage.Stage;
  
 
 /**
- * A chart in which lines connect a series of data points. Useful for viewing
- * data trends over time.
+ * A chart that displays the upward trend of human development (quality of life) from 1870-2015 using HIHD
+ * @author K.huang
  */
 public class LineChartApp extends Application {
  
@@ -29,12 +27,11 @@ public class LineChartApp extends Application {
         // Initialize the axes
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
-		
-		xAxis.setLabel("Year");
-		yAxis.setLabel("Historical Index of Human Development");
-        xAxis = new NumberAxis("Values for X-Axis", 1870, 2015, 10);
-        yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
+        xAxis = new NumberAxis("Year", 1870, 2015, 10);
+        yAxis = new NumberAxis("Historical Index of Human Development", 0, 1, 0.1);
 
+        // The data which is separated into series, that correspond to each country (I was planning on automating this step with a for loop...
+        // with getter methods from the data structures to get the values, but there were too many issues I could not troubleshoot)
         ObservableList<Series<? extends Number, Double>> lineChartData =
             FXCollections.observableArrayList(
 
@@ -117,7 +114,7 @@ public class LineChartApp extends Application {
  
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
-        primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015");
+        primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015"); // The title of the window
         primaryStage.show();
     }
  
