@@ -8,11 +8,12 @@ import javafx.scene.chart.PieChart.Data;
 public class Country {
     // Instance variables
     private String countryName;
-    private HashMap<Integer, Double> countryValues = new HashMap<>();
+    // private ArrayList<String> listCountries = new ArrayList<>();
+    
 
     public Country(String theCountryName, HashMap<Integer, Double> theCountryValues) {
         this.countryName = theCountryName;
-        this.countryValues = theCountryValues;
+        
     }
 
     // public void setCountryValues() {

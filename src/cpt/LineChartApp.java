@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.NumberAxis;
@@ -24,33 +26,44 @@ import javafx.stage.Stage;
 public class LineChartApp extends Application {
  
     private LineChart chart;
-    private NumberAxis xAxis;
+    private Axis<Integer> xAxis;
     private NumberAxis yAxis;
+    private double HIHD;
  
     public Parent createContent() {
-        xAxis = new NumberAxis("Values for X-Axis", 1870, 2015, 10);
-        xAxis.setLabel("Years");
-        yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
-        yAxis.setLabel("Historical Index of Human Development");
+        // Initialize the axes
+		CategoryAxis xAxis = new CategoryAxis();
+		NumberAxis yAxis = new NumberAxis();
+		
+		xAxis.setLabel("Year");
+		yAxis.setLabel("Historical Index of Human Development");
+		
+		LineChart<String, Number> linechart = new LineChart<String, Number>(xAxis, yAxis);
+        // xAxis = new NumberAxis("Values for X-Axis", 1870, 2015, 10);
+        // xAxis.setLabel("Years");
+        // yAxis = new NumberAxis("Values for Y-Axis", 0, 1, 0.1);
+        // yAxis.setLabel("Historical Index of Human Development");
+        // LineChart<Integer, Number> linechart = new LineChart<Integer, Number>(xAxis, yAxis);
 
-        for (int i = 0; i < dataSet.size(); i++) {
-            String country = Datapoint.getCountryName();
-            List<Datapoint> insertData = new ArrayList<>();
-        
-           
+        ArrayList<Datapoint> dataList = CSVReader.getDataSet();
+
+        for (int i = 0; i < CSVReader.getSize(); i++) {
+            String country = CSVReader.getCountryName().get(i);
+            // List<Datapoint> insertData = new ArrayList<>();
             XYChart.Series series = new XYChart.Series();
             series.setName(country);
-            for (int j = 0; j < dataSet.size(); j++) {
-                Datapoint curData = dataSet.get(j); // somehow get the object to instantiate so u can reference with getters
-                // Add the data onto the series
-                series.getData().add(new XYChart.Data(country, Datapoint.get(HIHD)));
-            }
-        
-           
 
-           
+            for (int j = 0; j < CSVReader.getSize(); j++) {
+                Datapoint graphData = dataList.get(j); // somehow get the object to instantiate so u can reference with getters
+                // Add the data onto the series
+                series.getData().add(new XYChart.Data(country, graphData.getHIHD()));
+            }
+            series.setName(country);
+            linechart.getData().add(series);
+
         }
 
+        return chart;
         // ObservableList<XYChart.Series<Integer,Double>> lineChartData = FXCollections.observableArrayList(
         //         new LineChart.Series<>("Series 1", FXCollections.observableArrayList(
                                        
@@ -68,8 +81,8 @@ public class LineChartApp extends Application {
         //             new XYChart.Data<>(2, 1.3),
         //             new XYChart.Data<>(2, 0.9)))
         //     );
-        chart = new LineChart(xAxis, yAxis, lineChartData);
-        return chart;
+        // chart = new LineChart(xAxis, yAxis, lineChartData);
+        
     }
  
     @Override public void start(Stage primaryStage) throws Exception {

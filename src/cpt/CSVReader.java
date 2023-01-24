@@ -10,10 +10,11 @@ import java.util.*;
 
 
 public class CSVReader {
-    
+
     // Initialize Data Structures
     static HashMap<String, List<Datapoint>> countryData = new HashMap<>();
     static ArrayList<Datapoint> dataSet = new ArrayList<>();
+    static ArrayList<String> listCountries = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         String filePath = "src\\cpt\\human-development-index-escosura.csv"; // relative path of the .csv file
@@ -40,9 +41,10 @@ public class CSVReader {
                 // Add the instance into an arraylist that stores the data
                 dataSet.add(addDataPoint);
 
-                // Add the data into hashmaps
+                // Add the data into hashmap and countryName arraylist
                 if (!countryName.equals(prevCountry)) {
                     countryData.putIfAbsent(countryName, new ArrayList<>()); // create a new arraylist for every corresponding country
+                    listCountries.add(countryName);
                 }
                 countryData.get(countryName).add(addDataPoint);
                 
@@ -55,5 +57,38 @@ public class CSVReader {
 
         // Testing functionality
         System.out.println(countryData.get("Afghanistan"));
+
+       
     }
+
+    
+    // Instance variables
+    private String dataCollectionName;
+    private int size;
+
+    public CSVReader(String theDataCollectionName, int theSize) {
+        this.dataCollectionName = theDataCollectionName;
+        this.size = theSize;
+    }
+
+    public String getDataCollectionName() {
+        return dataCollectionName;
+    }
+
+    public static int getSize() {
+        return countryData.size();
+    }
+
+    public static ArrayList<String> getCountryName() {
+        return listCountries;
+    }
+
+    public static ArrayList<Datapoint> getDataSet() {
+        return dataSet;
+    }
+
+
+
 }
+
+
