@@ -4,11 +4,10 @@ import java.io.*;
 import java.util.*;
 
 /**
- * This class takes in data from a .csv file and stores the data into an arraylist and a hashmap.
+ * This class takes in data from a .csv file and stores the data into an arraylist and a hashmap. 
+ * Also, includes getter methods and constructor to reference in other classes
  * @author K.huang
  */
-
-
 public class CSVReader {
 
     // Initialize Data Structures
@@ -57,8 +56,6 @@ public class CSVReader {
 
         // Testing functionality
         System.out.println(countryData.get("Afghanistan"));
-
-       
     }
 
     
@@ -66,30 +63,44 @@ public class CSVReader {
     private String dataCollectionName;
     private int size;
 
+    /**
+     * Constructor - Create new instance of CSVReader 
+     * @param theDataCollectionName - variable name of the data structure
+     * @param theSize - size of the data structure
+     */
     public CSVReader(String theDataCollectionName, int theSize) {
         this.dataCollectionName = theDataCollectionName;
         this.size = theSize;
     }
 
+    /**
+     * @return variable name of data structure
+     */
     public String getDataCollectionName() {
         return dataCollectionName;
     }
 
+    /**
+     * @return size() of the hashmap 
+     */
     public static int getSize() {
         return countryData.size();
     }
 
+    /**
+     * @return countryName
+     */
     public static ArrayList<String> getCountryName() {
         return listCountries;
     }
 
-
+    /**
+     * @param countryName
+     * @return the full list of data that corresponds to a country 
+     */
     public static List<Datapoint> getDataSet(String countryName) {
         return countryData.get(countryName);
     }
-
-
-
 }
 
 
