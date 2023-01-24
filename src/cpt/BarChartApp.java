@@ -17,17 +17,19 @@ import javafx.stage.Stage;
  * @author K.huang
  */
 public class BarChartApp extends Application {
- 
+    
     private BarChart chart;
     private CategoryAxis xAxis;
     private NumberAxis yAxis;
    
       public Parent createContent() {
-          String[] years = {"1900", "1950", "2015"};
+          String[] years = {"1900", "1950", "2015"}; 
+          // Initialize the axes
           xAxis = new CategoryAxis();
           xAxis.setCategories(FXCollections.<String>observableArrayList(years));
           yAxis = new NumberAxis("HIHD (Historical Index of Human Development)", 0.0, 1, 1.0);
 
+          // Manually input data into each series that correspond to country (had to dumb down)
           ObservableList<BarChart.Series> barChartData =
               FXCollections.observableArrayList(
 
