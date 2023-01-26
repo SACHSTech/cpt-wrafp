@@ -1,6 +1,7 @@
 /* ....Show License.... */
 package cpt;
  
+import java.io.IOException;
 import java.util.List;
 
 import javafx.application.Application;
@@ -27,7 +28,11 @@ public class LineChartApp extends Application {
     private NumberAxis xAxis;
     private NumberAxis yAxis;
  
-    public Parent createContent() {
+    public Parent createContent() throws IOException {
+
+        CSVReader loadData = new CSVReader();
+        CSVReader.readCSV("src\\cpt\\human-development-index-escosura.csv");
+ 
         // Initialize the axes
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
@@ -39,16 +44,16 @@ public class LineChartApp extends Application {
         // with getter methods from the data structures to get the values, but there were too many issues I could not troubleshoot)
        // LineChart linechart = new LineChart(xAxis, yAxis);  
         LineChart<String, Number> linechart = new LineChart<String, Number>(xAxis, yAxis);
-        CSVReader insert = new CSVReader();
+        
 
-        for (int i = 0; i < insert.getSize(); i++) {
-            String country = insert.getCountryName().get(i);
-            List<Datapoint> dataList = insert.getDataName(country);
+        for (int i = 0; i < loadData.getSize(); i++) {
+            String country = loadData.getCountryName().get(i);
+            List<Datapoint> dataList = loadData.getDataName(country);
             // List<Datapoint> insertData = new ArrayList<>();
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName(country);
 
-            for (int j = 0; j < insert.getSize(); j++) {
+            for (int j = 0; j < loadData.getSize(); j++) {
                 Datapoint graphData = dataList.get(j); // somehow get the object to instantiate so u can reference with getters
                 int year = graphData.getYear();
                 // Add the data onto the series
@@ -63,6 +68,8 @@ public class LineChartApp extends Application {
         return linechart;
     }
  
+    
+
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.setTitle("Historical Index of Human Development, 1870 to 2015"); // The title of the window

@@ -25,7 +25,7 @@ public class CSVReader {
         }
     }
     
-    private static void readCSV(String filePath) throws IOException {
+    public static void readCSV(String filePath) throws IOException {
         
         HashMap<String, List<Datapoint>> countryData = new HashMap<>();
         ArrayList<Datapoint> dataSet = new ArrayList<>();
