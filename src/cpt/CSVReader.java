@@ -9,14 +9,27 @@ import java.util.*;
  * @author K.huang
  */
 public class CSVReader {
+    static String filePath = "src\\cpt\\human-development-index-escosura.csv"; // relative path of the .csv file
 
     // Initialize Data Structures
-    static HashMap<String, List<Datapoint>> countryData = new HashMap<>();
-    static ArrayList<Datapoint> dataSet = new ArrayList<>();
-    static ArrayList<String> listCountries = new ArrayList<>();
+    private HashMap<String, List<Datapoint>> countryData = new HashMap<>();
+    private ArrayList<Datapoint> dataSet = new ArrayList<>();
+    private ArrayList<String> listCountries = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
-        String filePath = "src\\cpt\\human-development-index-escosura.csv"; // relative path of the .csv file
+    public static void main(String[] args) {
+        try {
+            readCSV(filePath);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    private static void readCSV(String filePath) throws IOException {
+        
+        HashMap<String, List<Datapoint>> countryData = new HashMap<>();
+        ArrayList<Datapoint> dataSet = new ArrayList<>();
+        ArrayList<String> listCountries = new ArrayList<>();
        
         try (BufferedReader fileRead = new BufferedReader(new FileReader(filePath))) {
             String currentLine = fileRead.readLine();
@@ -54,52 +67,33 @@ public class CSVReader {
             e.printStackTrace();
         }
 
-        // Testing functionality
-        System.out.println(countryData.get("Afghanistan"));
-    }
+    }    
 
-    
-    // Instance variables
-    private String dataCollectionName;
-    private int size;
-
-    /**
-     * Constructor - Create new instance of CSVReader 
-     * @param theDataCollectionName - variable name of the data structure
-     * @param theSize - size of the data structure
-     */
-    public CSVReader(String theDataCollectionName, int theSize) {
-        this.dataCollectionName = theDataCollectionName;
-        this.size = theSize;
-    }
-
-    /**
-     * @return variable name of data structure
-     */
-    public String getDataCollectionName() {
-        return dataCollectionName;
-    }
 
     /**
      * @return size() of the hashmap 
      */
-    public static int getSize() {
-        return countryData.size();
+    public int getSize() {
+        return this.countryData.size();
     }
 
     /**
      * @return countryName
      */
-    public static ArrayList<String> getCountryName() {
-        return listCountries;
+    public ArrayList<String> getCountryName() {
+        return this.listCountries;
+    }
+
+    public ArrayList<Datapoint> getDataSet() {
+        return this.dataSet;
     }
 
     /**
      * @param countryName
      * @return the full list of data that corresponds to a country 
      */
-    public static List<Datapoint> getDataSet(String countryName) {
-        return countryData.get(countryName);
+    public List<Datapoint> getDataName(String countryName) {
+        return this.countryData.get(countryName);
     }
 }
 
